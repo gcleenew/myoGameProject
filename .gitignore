@@ -3,7 +3,8 @@
 # =============== #
 Temp/
 Library/
-/[Bb]uild/
+/[Bb]uilds/
+Builds/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
