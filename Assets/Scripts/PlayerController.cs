@@ -29,7 +29,11 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
 	public float speed;
-	public Text countText;
+    public float xMin;
+    public float xGap;
+    public float yMin;
+    public float yGap;
+    public Text countText;
 	public Text winText;
 
 	private int count;
@@ -100,23 +104,33 @@ public class PlayerController : MonoBehaviour {
         
         float moveHorizontal = 0;
         float moveVertical = 0;
-
-        /*if (relativeRoll >= 25)
+        print("z:"+ myo.transform.forward.z);
+        print("y:"+ myo.transform.forward.y);
+        print("x:"+ myo.transform.forward.x);
+        if (myo.transform.forward.z >= xMin + xGap)
         {
             moveHorizontal = -1;
         }
-        else if (relativeRoll <= -25)
+        else if (myo.transform.forward.z <= xMin )
         {
             moveHorizontal = 1;
-        }*/
+        }
+        else
+        {
+            moveHorizontal = 0;
+        }
 
-        if (transform.localRotation.y >= 0.1)
+        if (myo.transform.forward.y >= yMin + yGap)
+        {
+            moveVertical = -1;
+        }
+        else if (myo.transform.forward.y <= yMin)
         {
             moveVertical = 1;
         }
-        else if (transform.localRotation.y <= -0.1)
+        else
         {
-            moveVertical = -1;
+            moveVertical = 0;
         }
 
         Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
