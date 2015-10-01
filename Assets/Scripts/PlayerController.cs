@@ -9,9 +9,8 @@ using VibrationType = Thalmic.Myo.VibrationType;
 using System;
 
 public class PlayerController : MonoBehaviour {
-    public JointOrientation Joint = null;
+    public JointOrientation JointObject = null;
 
-    public GiveRotation getJointRotation;
 
     private Rigidbody rb;
 	public float speed;
@@ -30,47 +29,48 @@ public class PlayerController : MonoBehaviour {
 		SetCountText ();
 		winText.text = "";
 
-        JointOrientation Joint = Joint.GetComponent<JointOrientation> ();
+        
 
 
 	}
 
 	void FixedUpdate ()
 	{
-        float x = Joint.transform.rotation.eulerAngles.x;
-        float y = Joint.transform.rotation.eulerAngles.y;
-        float z = Joint.transform.rotation.eulerAngles.z;
+        var JointObject =  GameObject.Find("Stick");
+        float x = JointObject.transform.rotation.eulerAngles.x;
+        float y = JointObject.transform.rotation.eulerAngles.y;
+        float z = JointObject.transform.rotation.eulerAngles.z;
         
         float moveHorizontal = 0;
         float moveVertical = 0;
         print("x:"+ x);
         print("y:"+ y);
         print("z:"+ z);
-        /*if (x >= xMin + xGap)
+        if (0 + xGap < x && x < 180)
         {
-            moveHorizontal = -1;
+            moveVertical = 1;
         }
-        else if (x <= xMin )
+        else if (180  < x && x < 360 - xGap)
+        {
+            moveVertical = -1;
+        }
+        else
+        {
+            moveVertical = 0;
+        }
+
+        if (0 + yGap < y && y < 180)
         {
             moveHorizontal = 1;
+        }
+        else if (180  < y && y < 360 - yGap)
+        {
+            moveHorizontal = -1;
         }
         else
         {
             moveHorizontal = 0;
         }
-
-        if (y >= yMin + yGap)
-        {
-            moveVertical = -1;
-        }
-        else if (y <= yMin)
-        {
-            moveVertical = 1;
-        }
-        else
-        {
-            moveVertical = 0;
-        }*/
 
         Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
