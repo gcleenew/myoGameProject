@@ -14,10 +14,9 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
 	public float speed;
-    public float xMin;
     public float xGap;
-    public float yMin;
     public float yGap;
+    public int countVictory;
     public Text countText;
 	public Text winText;
 
@@ -42,9 +41,7 @@ public class PlayerController : MonoBehaviour {
         float z = JointObject.transform.rotation.eulerAngles.z;
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
-        print("x:"+ x);
-        print("y:"+ y);
-        print("z:"+ z);
+
         if (0 + xGap < x && x < 180)
         {
             moveVertical = 1;
@@ -85,7 +82,7 @@ public class PlayerController : MonoBehaviour {
 	void SetCountText ()
 	{
 		countText.text = "Count: " + count.ToString ();
-		if (count >= 13) {
+		if (count >= countVictory) {
 			winText.text = "You Win!";
 		}
 	}
