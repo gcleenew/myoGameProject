@@ -40,9 +40,8 @@ public class PlayerController : MonoBehaviour {
         float x = JointObject.transform.rotation.eulerAngles.x;
         float y = JointObject.transform.rotation.eulerAngles.y;
         float z = JointObject.transform.rotation.eulerAngles.z;
-        
-        float moveHorizontal = 0;
-        float moveVertical = 0;
+        float moveHorizontal = Input.GetAxis ("Horizontal");
+        float moveVertical = Input.GetAxis ("Vertical");
         print("x:"+ x);
         print("y:"+ y);
         print("z:"+ z);
@@ -54,10 +53,7 @@ public class PlayerController : MonoBehaviour {
         {
             moveVertical = -1;
         }
-        else
-        {
-            moveVertical = 0;
-        }
+
 
         if (0 + yGap < y && y < 180)
         {
@@ -67,10 +63,7 @@ public class PlayerController : MonoBehaviour {
         {
             moveHorizontal = -1;
         }
-        else
-        {
-            moveHorizontal = 0;
-        }
+
 
         Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
