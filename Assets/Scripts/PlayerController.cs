@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate ()
 	{
         var JointObject =  GameObject.Find("Stick");
-        float x = JointObject.transform.rotation.eulerAngles.x;
+        /*float x = JointObject.transform.rotation.eulerAngles.x;
         float y = JointObject.transform.rotation.eulerAngles.y;
         float z = JointObject.transform.rotation.eulerAngles.z;
         
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-		rb.AddForce (movement * speed); 
+		rb.AddForce (movement * speed); */
 	}
 
 
