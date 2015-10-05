@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         float z = JointObject.transform.rotation.eulerAngles.z;
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
+        float moveUp = 0;
 
         if (0 + xGap < x && x < 180)
         {
@@ -60,9 +61,11 @@ public class PlayerController : MonoBehaviour {
         {
             moveHorizontal = -1;
         }
+        if (Input.GetKeyDown ("j")) {
+            moveUp = 100;
+        }
 
-
-        Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
 
 		rb.AddForce (movement * speed); 
 	}
