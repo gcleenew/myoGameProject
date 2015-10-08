@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
             moveUp = 100;
         }
 
-        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
+        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);  
 
 		rb.AddForce (movement * speed); 
 	}
