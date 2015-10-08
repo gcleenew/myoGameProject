@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public int countVictory;
     public Text countText;
 	public Text winText;
+    public Text levelText;
 
 	private int count;
 	void Start ()
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 		count = 0;
 		SetCountText ();
 		winText.text = "";
+        levelText.text = "";
 
         
 
@@ -67,8 +69,18 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);  
 
-		rb.AddForce (movement * speed); 
-	}
+		rb.AddForce (movement * speed);
+
+        if (count >= 0)
+        {
+            if (Input.GetKeyDown("return"))
+            {
+
+                Application.LoadLevel("minigame");
+            }
+            
+        }
+    }
 
 
     //functions
@@ -87,8 +99,11 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 		if (count >= countVictory) {
 			winText.text = "You Win!";
+            levelText.text = "Press Enter to continue";
 		}
 	}
+
+   
 
     
 
