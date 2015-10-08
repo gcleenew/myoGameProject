@@ -44,7 +44,7 @@ public class JointOrientation : MonoBehaviour
             if (thalmicMyo.pose == Pose.FingersSpread) {
                 updateReference = true;
 
-                ExtendUnlockAndNotifyUserAction(thalmicMyo);
+                //ExtendUnlockAndNotifyUserAction(thalmicMyo);
             }
         }
         if (Input.GetKeyDown ("r")) {
@@ -147,7 +147,7 @@ public class JointOrientation : MonoBehaviour
 
     // Extend the unlock if ThalmcHub's locking policy is standard, and notifies the given myo that a user action was
     // recognized.
-    void ExtendUnlockAndNotifyUserAction (ThalmicMyo myo)
+    /*void ExtendUnlockAndNotifyUserAction (ThalmicMyo myo)
     {
         ThalmicHub hub = ThalmicHub.instance;
 
@@ -156,5 +156,5 @@ public class JointOrientation : MonoBehaviour
         }
 
         myo.NotifyUserAction ();
-    }
+    }*/
 }
