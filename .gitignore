@@ -5,6 +5,12 @@ Temp/
 Library/
 /[Bb]uild/
 
+/[Bb]uilds/
+Builds/
+
+ProjectSettings/
+
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
