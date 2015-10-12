@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 		winText.text = "";
         levelText.text = "";
 
-        
+
 
 
 	}
@@ -67,24 +67,31 @@ public class PlayerController : MonoBehaviour {
             moveUp = 30;
         }
 
-        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);  
+        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
 
-		rb.AddForce (movement * speed);
+		    rb.AddForce (movement * speed);
+        if (transform.position.y < -100) {
+          SetLooseText();
+          movement = new Vector3 (0, 0, 0);
+        }
 
-        if (count >= 0)
+
+        if (Input.GetKeyDown("return"))
         {
-            if (Input.GetKeyDown("return"))
+            if (count >= countVictory)
             {
-
-                Application.LoadLevel("minigame");
+              Application.LoadLevel("SandDune");
             }
-            
+
+            if (transform.position.y < -100) {
+              Application.LoadLevel(Application.loadedLevel);
+            }
         }
     }
 
 
     //functions
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag ("Pick Up"))
 		{
@@ -99,15 +106,12 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 		if (count >= countVictory) {
 			winText.text = "You Win!";
-            levelText.text = "Press Enter to continue";
+      levelText.text = "Press Enter to continue";
 		}
 	}
 
-   
-
-    
-
-    
-
-
+  void SetLooseText () {
+    winText.text = "You loose!";
+    levelText.text = "Press Enter to reload";
+  }
 }
