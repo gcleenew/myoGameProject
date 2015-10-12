@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour {
         {
             moveHorizontal = -1;
         }
-        if (Input.GetKeyDown ("j")) {
-            moveUp = 100;
+        if (Input.GetKeyDown ("j") && transform.position.y < 1) {
+            moveUp = 30;
         }
 
         Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);  
