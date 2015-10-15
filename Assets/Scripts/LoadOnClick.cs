@@ -10,4 +10,13 @@ public class LoadOnClick : MonoBehaviour {
 		//loadingImage.SetActive(true);
 		Application.LoadLevel(level);
 	}
+
+	public void Restart(){
+		Application.LoadLevel (Application.loadedLevel);
+	}
+
+	public void NextLevel(){
+		int currentLevel = Application.loadedLevel;
+		Application.LoadLevel (currentLevel + 1);
+	}
 }

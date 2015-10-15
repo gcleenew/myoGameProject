@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 		if (count >= countVictory) {
 			winText.text = "You Win!";
-      levelText.text = "Press Enter to continue";
+      		levelText.text = "Press Enter to continue";
 		}
 	}
 
