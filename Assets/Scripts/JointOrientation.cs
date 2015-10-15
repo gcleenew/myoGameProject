@@ -20,7 +20,7 @@ public class JointOrientation : MonoBehaviour
     // Once set, the direction the Myo armband is facing becomes "forward" within the program.
     // Set by making the fingers spread pose or pressing "r".
     private Quaternion _antiYaw = Quaternion.identity;
-
+    private bool updateReference = true;
     // A reference angle representing how the armband is rotated about the wearer's arm, i.e. roll.
     // Set by making the fingers spread pose or pressing "r".
     private float _referenceRoll = 0.0f;
@@ -30,6 +30,7 @@ public class JointOrientation : MonoBehaviour
     // which they are active.
     private Pose _lastPose = Pose.Unknown;
 
+    
     // Update is called once per frame.
     void Update ()
     {
@@ -37,7 +38,7 @@ public class JointOrientation : MonoBehaviour
         ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
 
         // Update references when the pose becomes fingers spread or the q key is pressed.
-        bool updateReference = false;
+        
         if (thalmicMyo.pose != _lastPose) {
             _lastPose = thalmicMyo.pose;
 
@@ -68,6 +69,7 @@ public class JointOrientation : MonoBehaviour
             // the roll value matches the reference.
             Vector3 referenceZeroRoll = computeZeroRollVector (myo.transform.forward);
             _referenceRoll = rollFromZero (referenceZeroRoll, myo.transform.forward, myo.transform.up);
+            updateReference = false;
         }
 
         // Current zero roll vector and roll value.

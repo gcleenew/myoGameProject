@@ -22,6 +22,15 @@ public class CanvasController : MonoBehaviour {
 	// which they are active.
 	private Pose _lastPose = Pose.Unknown;
 	// Update is called once per frame
+
+    void Start()
+    {
+        Button selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
+        ColorBlock cb = new ColorBlock();
+        cb = selectedButton.colors;
+        cb.normalColor = new Color32(220, 74, 59, 250);
+        selectedButton.colors = cb;
+    }
 	void Update () {
 		// Access the ThalmicMyo component attached to the Myo game object.
 		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
@@ -35,8 +44,9 @@ public class CanvasController : MonoBehaviour {
 				_lastPose = thalmicMyo.pose;
 				Button selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
 				ColorBlock cb = new ColorBlock();
-				// Vibrate the Myo armband when a fist is made.
-				if (thalmicMyo.pose == Pose.Fist) {
+
+            // Vibrate the Myo armband when a fist is made.
+            if (thalmicMyo.pose == Pose.Fist) {
 						thalmicMyo.Vibrate (VibrationType.Medium);
 
 						load.LoadScene(selected);
@@ -51,8 +61,9 @@ public class CanvasController : MonoBehaviour {
 								selectedButton.colors = cb;
 							selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
 								cb = selectedButton.colors;
-								cb.normalColor = Color.grey;
-								selectedButton.colors = cb;
+								cb.normalColor = new Color32(220, 74, 59, 250);
+                    cb.highlightedColor = Color.green;
+                    selectedButton.colors = cb;
 						}
 
 						ExtendUnlockAndNotifyUserAction (thalmicMyo);
@@ -65,8 +76,9 @@ public class CanvasController : MonoBehaviour {
 								selectedButton.colors = cb;
 							selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
 								cb = selectedButton.colors;
-								cb.normalColor = Color.grey;
-								selectedButton.colors = cb;
+								cb.normalColor = new Color32(220,74,59, 250);
+                    cb.highlightedColor = Color.green;
+                    selectedButton.colors = cb;
 						}
 
 						ExtendUnlockAndNotifyUserAction (thalmicMyo);
