@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 using LockingPolicy = Thalmic.Myo.LockingPolicy;
 using Pose = Thalmic.Myo.Pose;
@@ -13,9 +12,9 @@ public class CanvasController : MonoBehaviour {
 	// Myo game object to connect with.
 	// This object must have a ThalmicMyo script attached.
 	public GameObject myo = null;
-	public int numberOfStage;
-	private int selected = 1;
-	private Button selectedButton;
+	private int selected = 0;
+
+	private Button[] buttons = new Button[10];
 
 	// The pose from the last update. This is used to determine if the pose has changed
 	// so that actions are only performed upon making them rather than every frame during
@@ -25,11 +24,11 @@ public class CanvasController : MonoBehaviour {
 
     void Start()
     {
-        Button selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
+        buttons = FindObjectsOfType(typeof(Button)) as Button[];
         ColorBlock cb = new ColorBlock();
-        cb = selectedButton.colors;
+        cb = buttons[0].colors;
         cb.normalColor = new Color32(220, 74, 59, 250);
-        selectedButton.colors = cb;
+        buttons[0].colors = cb;
     }
 	void Update () {
 		// Access the ThalmicMyo component attached to the Myo game object.
@@ -42,43 +41,43 @@ public class CanvasController : MonoBehaviour {
 		// is not on a user's arm, pose will be set to Pose.Unknown.
 		if (thalmicMyo.pose != _lastPose) {
 				_lastPose = thalmicMyo.pose;
-				Button selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
+				buttons = FindObjectsOfType(typeof(Button)) as Button[];
 				ColorBlock cb = new ColorBlock();
 
-            // Vibrate the Myo armband when a fist is made.
-            if (thalmicMyo.pose == Pose.Fist) {
-						thalmicMyo.Vibrate (VibrationType.Medium);
-
-						load.LoadScene(selected);
-
-				// Change material when wave in, wave out or double tap poses are made.
+        // Vibrate the Myo armband when a fist is made.
+        if (thalmicMyo.pose == Pose.Fist) {
+					thalmicMyo.Vibrate (VibrationType.Medium);
+					buttons[selected].onClick.Invoke();
 				}
 			 if (thalmicMyo.pose == Pose.WaveIn) {
-						if (selected > 1) {
+						if (selected > 0) {
+
+							cb = buttons[selected].colors;
+							cb.normalColor = Color.white;
+							buttons[selected].colors = cb;
+
 							selected -= 1;
-								cb = selectedButton.colors;
-								cb.normalColor = Color.white;
-								selectedButton.colors = cb;
-							selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
-								cb = selectedButton.colors;
-								cb.normalColor = new Color32(220, 74, 59, 250);
-                    cb.highlightedColor = Color.green;
-                    selectedButton.colors = cb;
+
+							cb = buttons[selected].colors;
+							cb.normalColor = new Color32(220, 74, 59, 250);
+              cb.highlightedColor = Color.green;
+              buttons[selected].colors = cb;
 						}
 
 						ExtendUnlockAndNotifyUserAction (thalmicMyo);
 				}
 				 if (thalmicMyo.pose == Pose.WaveOut) {
-						if (selected < numberOfStage) {
+						if (selected < buttons.Length) {
+							cb = buttons[selected].colors;
+							cb.normalColor = Color.white;
+							buttons[selected].colors = cb;
+
 							selected += 1;
-								cb = selectedButton.colors;
-								cb.normalColor = Color.white;
-								selectedButton.colors = cb;
-							selectedButton = GameObject.Find("Level " + selected).GetComponent<Button>();
-								cb = selectedButton.colors;
-								cb.normalColor = new Color32(220,74,59, 250);
-                    cb.highlightedColor = Color.green;
-                    selectedButton.colors = cb;
+
+							cb = buttons[selected].colors;
+							cb.normalColor = new Color32(220, 74, 59, 250);
+              cb.highlightedColor = Color.green;
+              buttons[selected].colors = cb;
 						}
 
 						ExtendUnlockAndNotifyUserAction (thalmicMyo);
