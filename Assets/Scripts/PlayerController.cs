@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public int countVictory;
     public Text countText;
 	public Text winText;
+    public Text levelText;
 
 	private int count;
 	void Start ()
@@ -27,8 +28,7 @@ public class PlayerController : MonoBehaviour {
 		count = 0;
 		SetCountText ();
 		winText.text = "";
-
-        
+        levelText.text = "";
 
 
 	}
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         float z = JointObject.transform.rotation.eulerAngles.z;
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
+        float moveUp = 0;
 
         if (0 + xGap < x && x < 180)
         {
@@ -60,16 +61,35 @@ public class PlayerController : MonoBehaviour {
         {
             moveHorizontal = -1;
         }
+        if (Input.GetKeyDown ("j") && transform.position.y < 1) {
+            moveUp = 30;
+        }
+
+        Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
+
+		    rb.AddForce (movement * speed);
+        if (transform.position.y < -100) {
+          SetLooseText();
+          movement = new Vector3 (0, 0, 0);
+        }
 
 
-        Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+        if (Input.GetKeyDown("return"))
+        {
+            if (count >= countVictory)
+            {
+              Application.LoadLevel("Bridge");
+            }
 
-		rb.AddForce (movement * speed); 
-	}
+            if (transform.position.y < -100) {
+              Application.LoadLevel(Application.loadedLevel);
+            }
+        }
+    }
 
 
     //functions
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag ("Pick Up"))
 		{
@@ -84,12 +104,12 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 		if (count >= countVictory) {
 			winText.text = "You Win!";
+      levelText.text = "Press Enter to continue";
 		}
 	}
 
-    
-
-    
-
-
+  void SetLooseText () {
+    winText.text = "You loose!";
+    levelText.text = "Press Enter to reload";
+  }
 }
