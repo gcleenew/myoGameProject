@@ -26,9 +26,9 @@ public class CanvasController : MonoBehaviour {
     {
         buttons = FindObjectsOfType(typeof(Button)) as Button[];
         ColorBlock cb = new ColorBlock();
-        cb = buttons[0].colors;
+        cb = buttons[selected].colors;
         cb.normalColor = new Color32(220, 74, 59, 250);
-        buttons[0].colors = cb;
+        buttons[selected].colors = cb;
     }
 	void Update () {
 		// Access the ThalmicMyo component attached to the Myo game object.
@@ -67,7 +67,7 @@ public class CanvasController : MonoBehaviour {
 						ExtendUnlockAndNotifyUserAction (thalmicMyo);
 				}
 				 if (thalmicMyo.pose == Pose.WaveOut) {
-						if (selected < buttons.Length) {
+						if (selected < buttons.Length - 1) {
 							cb = buttons[selected].colors;
 							cb.normalColor = Color.white;
 							buttons[selected].colors = cb;
