@@ -44,6 +44,7 @@ public class CanvasController : MonoBehaviour {
 				buttons = FindObjectsOfType(typeof(Button)) as Button[];
 				ColorBlock cb = new ColorBlock();
 
+            
         // Vibrate the Myo armband when a fist is made.
         if (thalmicMyo.pose == Pose.Fist) {
 					thalmicMyo.Vibrate (VibrationType.Medium);
