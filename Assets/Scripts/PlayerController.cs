@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     public int countVictory;
     public Text countText;
 	public Text winText;
-    public Text levelText;
 
 	private int count;
 	void Start ()
@@ -28,7 +27,6 @@ public class PlayerController : MonoBehaviour {
 		count = 0;
 		SetCountText ();
 		winText.text = "";
-    levelText.text = "";
 	}
 
 	void FixedUpdate ()
@@ -102,12 +100,10 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 		if (count >= countVictory) {
 			winText.text = "You Win!";
-      levelText.text = "Press Enter to continue";
 		}
 	}
 
   void SetLooseText () {
     winText.text = "You loose!";
-    levelText.text = "Press Enter to reload";
   }
 }
