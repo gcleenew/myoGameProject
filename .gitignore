@@ -3,11 +3,13 @@
 # =============== #
 Temp/
 Library/
+/[Bb]uild/
 
 /[Bb]uilds/
 Builds/
 
 ProjectSettings/
+/[Pp]roject[Ss]ettings/
 
 
 # ===================================== #

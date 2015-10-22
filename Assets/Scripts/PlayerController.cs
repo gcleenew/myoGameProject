@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -28,9 +28,7 @@ public class PlayerController : MonoBehaviour {
 		count = 0;
 		SetCountText ();
 		winText.text = "";
-        levelText.text = "";
-
-
+    levelText.text = "";
 	}
 
 	void FixedUpdate ()
@@ -78,7 +76,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (count >= countVictory)
             {
-              Application.LoadLevel("Bridge");
+              Application.LoadLevel("SandDune");
             }
 
             if (transform.position.y < -100) {
