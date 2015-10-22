@@ -9,6 +9,10 @@ using VibrationType = Thalmic.Myo.VibrationType;
 using System;
 
 public class PlayerController : MonoBehaviour {
+
+	//public PauseGame script;
+	private PauseGame pauseGame;
+
     public JointOrientation JointObject = null;
 
 
@@ -22,6 +26,11 @@ public class PlayerController : MonoBehaviour {
     public Text levelText;
 
 	private int count;
+
+	void Awake(){
+		pauseGame = GetComponent<PauseGame>();
+	}
+
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody> ();
@@ -29,10 +38,6 @@ public class PlayerController : MonoBehaviour {
 		SetCountText ();
 		winText.text = "";
         levelText.text = "";
-
-
-
-
 	}
 
 	void FixedUpdate ()
@@ -71,22 +76,34 @@ public class PlayerController : MonoBehaviour {
 
 		    rb.AddForce (movement * speed);
         if (transform.position.y < -100) {
-          SetLooseText();
-          movement = new Vector3 (0, 0, 0);
+        	SetLooseText();
+        	movement = new Vector3 (0, 0, 0);
         }
 
 
-        if (Input.GetKeyDown("return"))
-        {
+        //if (Input.GetKeyDown("return"))
+        //{
             if (count >= countVictory)
             {
-              Application.LoadLevel("SandDune");
-            }
+              //Call pause function in PauseGame.cs
+				pauseGame.DoPause();
+				//var player =  GameObject.Find("player");
+				//PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
+				//Debug.Log("GameObject : "+player);
+				//Debug.Log (pause);
+				//pause.DoPause();
+			}
 
             if (transform.position.y < -100) {
-              Application.LoadLevel(Application.loadedLevel);
+              //Application.LoadLevel(Application.loadedLevel);
+				//Call pause function in PauseGame.cs
+				var player =  GameObject.Find("player");
+				PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
+				Debug.Log("GameObject : "+player);
+				Debug.Log (pause);
+				pause.DoPause();
             }
-        }
+        //}
     }
 
 
