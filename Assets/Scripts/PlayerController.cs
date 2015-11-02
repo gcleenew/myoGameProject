@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour {
 	public Text winText;
     public Text levelText;
 
+    
+
 	private int count;
 	void Start ()
 	{
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
         float moveUp = 0;
-
+        
         if (0 + xGap < x && x < 180)
         {
             moveVertical = 1;
@@ -66,6 +68,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown ("j") && transform.position.y < 1) {
             moveUp = 30;
         }
+        if (Input.GetKey("space") && transform.position.y < 2 && rb.position.y < 2)
+            moveUp = 5;
 
         Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
 
@@ -75,6 +79,7 @@ public class PlayerController : MonoBehaviour {
           movement = new Vector3 (0, 0, 0);
         }
 
+        
 
         if (Input.GetKeyDown("return"))
         {
@@ -109,9 +114,32 @@ public class PlayerController : MonoBehaviour {
       levelText.text = "Press Enter to continue";
 		}
 	}
+    void UpDate()
+    {
+
+        //if (Input.GetKey("space") && Physics.Raycast(transform.position, -Vector3.up, 1))
+        if (Input.GetKey("up"))
+        {
+            rb.AddForce(Vector3.right * -speed * Time.deltaTime);
+            //rb.velocity.y = jumpSpeed;
+            //Rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+        }
+
+        if (Input.GetKey("right"))
+        {
+            
+            rb.AddForce(Vector3.right * speed * Time.deltaTime);
+        }
+
+        if (Input.GetKey("left"))
+        {
+            rb.AddForce(Vector3.right * -speed * Time.deltaTime);
+        }
+    }
 
   void SetLooseText () {
     winText.text = "You loose!";
     levelText.text = "Press Enter to reload";
   }
 }
+

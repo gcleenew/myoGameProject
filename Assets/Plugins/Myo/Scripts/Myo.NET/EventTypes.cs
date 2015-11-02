@@ -9,8 +9,8 @@ namespace Thalmic.Myo
     {
         public MyoEventArgs(Myo myo, DateTime timestamp)
         {
-            this.Myo = myo;
-            this.Timestamp = timestamp;
+            Myo = myo;
+            Timestamp = timestamp;
         }
 
         public Myo Myo { get; private set; }
@@ -23,8 +23,8 @@ namespace Thalmic.Myo
         public ArmSyncedEventArgs(Myo myo, DateTime timestamp, Arm arm, XDirection xDirection)
             : base(myo, timestamp)
         {
-            this.Arm = arm;
-            this.XDirection = xDirection;
+            Arm = arm;
+            XDirection = xDirection;
         }
 
         public Arm Arm { get; private set; }
@@ -36,7 +36,7 @@ namespace Thalmic.Myo
         public AccelerometerDataEventArgs(Myo myo, DateTime timestamp, Vector3 accelerometer)
             : base(myo, timestamp)
         {
-            this.Accelerometer = accelerometer;
+            Accelerometer = accelerometer;
         }
 
         public Vector3 Accelerometer { get; private set; }
@@ -47,7 +47,7 @@ namespace Thalmic.Myo
         public GyroscopeDataEventArgs(Myo myo, DateTime timestamp, Vector3 gyroscope)
             : base(myo, timestamp)
         {
-            this.Gyroscope = gyroscope;
+            Gyroscope = gyroscope;
         }
 
         public Vector3 Gyroscope { get; private set; }
@@ -58,7 +58,7 @@ namespace Thalmic.Myo
         public OrientationDataEventArgs(Myo myo, DateTime timestamp, Quaternion orientation)
             : base(myo, timestamp)
         {
-            this.Orientation = orientation;
+            Orientation = orientation;
         }
 
         public Quaternion Orientation { get; private set; }
@@ -69,7 +69,7 @@ namespace Thalmic.Myo
         public PoseEventArgs(Myo myo, DateTime timestamp, Pose pose)
             : base(myo, timestamp)
         {
-            this.Pose = pose;
+            Pose = pose;
         }
 
         public Pose Pose { get; private set; }
@@ -80,7 +80,7 @@ namespace Thalmic.Myo
         public RssiEventArgs(Myo myo, DateTime timestamp, sbyte rssi)
             : base(myo, timestamp)
         {
-            this.Rssi = rssi;
+            Rssi = rssi;
         }
 
         public sbyte Rssi { get; private set; }

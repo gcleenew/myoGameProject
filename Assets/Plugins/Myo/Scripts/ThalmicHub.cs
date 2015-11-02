@@ -71,7 +71,7 @@ public class ThalmicHub : MonoBehaviour
                                         "Your scene contains more than one ThalmicHub. Remove all but one ThalmicHub.",
                                         "OK");
 #endif
-            Destroy (this.gameObject);
+            Destroy (gameObject);
             return;
         } else {
             _instance = this;
