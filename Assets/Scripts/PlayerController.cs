@@ -9,23 +9,28 @@ using VibrationType = Thalmic.Myo.VibrationType;
 using System;
 
 public class PlayerController : MonoBehaviour {
-    public JointOrientation JointObject = null;
+  public JointOrientation JointObject = null;
 
 
-    private Rigidbody rb;
-	public float speed;
-    public float xGap;
-    public float yGap;
-    public int countVictory;
-    public Text countText;
-	public Text winText;
+  private Rigidbody rb;
+  public float speed;
+  public float xGap;
+  public float yGap;
+  public int countVictory;
+  public Text countText;
+  public Text winText;
+  public Text timerText;
+
+  private float startTime;
 
 	private int count;
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody> ();
 		count = 0;
+    startTime = 0f;
 		SetCountText ();
+    timerText.text = "";
 		winText.text = "";
 	}
 
@@ -38,6 +43,9 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
         float moveUp = 0;
+
+        startTime += Time.deltaTime;
+        setTimerText ();
 
         if (0 + xGap < x && x < 180)
         {
@@ -105,5 +113,10 @@ public class PlayerController : MonoBehaviour {
 
   void SetLooseText () {
     winText.text = "You loose!";
+  }
+
+  void setTimerText ()
+  {
+    timerText.text = Math.Round(startTime, 1, MidpointRounding.AwayFromZero)+" s";
   }
 }
