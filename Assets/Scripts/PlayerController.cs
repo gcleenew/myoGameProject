@@ -11,7 +11,9 @@ using System;
 public class PlayerController : MonoBehaviour {
   public JointOrientation JointObject = null;
 
-
+  public GameObject myo = null;
+  private bool sameMovement = false;
+  private Pose _lastPose = Pose.Unknown;
   private Rigidbody rb;
   public float speed;
   public float xGap;
@@ -32,10 +34,30 @@ public class PlayerController : MonoBehaviour {
 		SetCountText ();
     timerText.text = "";
 		winText.text = "";
+
 	}
 
 	void FixedUpdate ()
 	{
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
+        LoadOnClick load = GetComponent<LoadOnClick>();
+        // Check if the pose has changed since last update.
+        // The ThalmicMyo component of a Myo game object has a pose property that is set to the
+        // currently detected pose (e.g. Pose.Fist for the user making a fist). If no pose is currently
+        // detected, pose will be set to Pose.Rest. If pose detection is unavailable, e.g. because Myo
+        // is not on a user's arm, pose will be set to Pose.Unknown.
+        if (thalmicMyo.pose != _lastPose) {
+            _lastPose = thalmicMyo.pose;
+            if (thalmicMyo.pose == Pose.WaveOut) {
+                sameMovement = true;
+            }
+          }
+        else {
+          sameMovement = false;
+        }
+
+
+
         var JointObject =  GameObject.Find("Stick");
         float x = JointObject.transform.rotation.eulerAngles.x;
         float y = JointObject.transform.rotation.eulerAngles.y;
@@ -65,9 +87,10 @@ public class PlayerController : MonoBehaviour {
         {
             moveHorizontal = -1;
         }
-        if (Input.GetKeyDown ("j") && transform.position.y < 1) {
+        if (sameMovement) {
             moveUp = 30;
         }
+
 
         Vector3 movement = new Vector3 (moveHorizontal, moveUp, moveVertical);
 
@@ -112,11 +135,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
   void SetLooseText () {
-    winText.text = "You loose!";
+    winText.text = "You loose! Make a fist to continue";
   }
 
   void setTimerText ()
   {
     timerText.text = Math.Round(startTime, 1, MidpointRounding.AwayFromZero)+" s";
   }
+ 
 }

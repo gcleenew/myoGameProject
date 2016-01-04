@@ -13,7 +13,6 @@ public class CanvasController : MonoBehaviour {
 	// This object must have a ThalmicMyo script attached.
 	public GameObject myo = null;
 	private int selected = 0;
-
 	private Button[] buttons = new Button[10];
 
 	// The pose from the last update. This is used to determine if the pose has changed
@@ -29,6 +28,7 @@ public class CanvasController : MonoBehaviour {
         cb = buttons[selected].colors;
         cb.normalColor = new Color32(220, 74, 59, 250);
         buttons[selected].colors = cb;
+        
     }
 	void Update () {
 		// Access the ThalmicMyo component attached to the Myo game object.
