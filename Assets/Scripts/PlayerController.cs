@@ -22,10 +22,15 @@ public class PlayerController : MonoBehaviour {
   public Text countText;
   public Text winText;
   public Text timerText;
-
+  private PauseGame pauseGame;
   private float startTime;
 
 	private int count;
+
+	void Awake(){
+		pauseGame = GetComponent<PauseGame>();
+	}
+
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody> ();
@@ -34,7 +39,6 @@ public class PlayerController : MonoBehaviour {
 		SetCountText ();
     timerText.text = "";
 		winText.text = "";
-
 	}
 
 	void FixedUpdate ()
@@ -96,22 +100,34 @@ public class PlayerController : MonoBehaviour {
 
 		    rb.AddForce (movement * speed);
         if (transform.position.y < -100) {
-          SetLooseText();
-          movement = new Vector3 (0, 0, 0);
+        	SetLooseText();
+        	movement = new Vector3 (0, 0, 0);
         }
 
 
-        if (Input.GetKeyDown("return"))
-        {
+        //if (Input.GetKeyDown("return"))
+        //{
             if (count >= countVictory)
             {
-              Application.LoadLevel("SandDune");
-            }
+              //Call pause function in PauseGame.cs
+				pauseGame.DoPause();
+				//var player =  GameObject.Find("player");
+				//PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
+				//Debug.Log("GameObject : "+player);
+				//Debug.Log (pause);
+				//pause.DoPause();
+			}
 
             if (transform.position.y < -100) {
-              Application.LoadLevel(Application.loadedLevel);
+              //Application.LoadLevel(Application.loadedLevel);
+				//Call pause function in PauseGame.cs
+				var player =  GameObject.Find("player");
+				PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
+				Debug.Log("GameObject : "+player);
+				Debug.Log (pause);
+				pause.DoPause();
             }
-        }
+        //}
     }
 
 
