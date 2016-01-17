@@ -70,9 +70,6 @@ public class PlayerController : MonoBehaviour {
         float moveVertical = Input.GetAxis ("Vertical");
         float moveUp = 0;
 
-        startTime += Time.deltaTime;
-        setTimerText ();
-
         if (0 + xGap < x && x < 180)
         {
             moveVertical = 1;
@@ -105,18 +102,20 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        //if (Input.GetKeyDown("return"))
-        //{
-            if (count >= countVictory)
-            {
-              //Call pause function in PauseGame.cs
-				pauseGame.DoPause();
-				//var player =  GameObject.Find("player");
-				//PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
-				//Debug.Log("GameObject : "+player);
-				//Debug.Log (pause);
-				//pause.DoPause();
-			}
+        if (count < countVictory) {
+			startTime += Time.deltaTime;
+			setTimerText ();
+		}
+        if (count >= countVictory)
+        {
+          //Call pause function in PauseGame.cs
+			pauseGame.DoPause();
+			//var player =  GameObject.Find("player");
+			//PauseGame pause = (PauseGame) player.GetComponent(typeof(PauseGame));
+			//Debug.Log("GameObject : "+player);
+			//Debug.Log (pause);
+			//pause.DoPause();
+		}
 
             if (transform.position.y < -100) {
               //Application.LoadLevel(Application.loadedLevel);
